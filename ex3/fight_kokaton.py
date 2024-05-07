@@ -230,10 +230,11 @@ def main():
             bomb.update(screen)
         if beam is not None:
             beam.update(screen)
+        score.update(screen)     # スコア表示
         pg.display.update()
         tmr += 1
         clock.tick(50)
-        score.update(screen)     # スコア表示
+        
 
 
 if __name__ == "__main__":
