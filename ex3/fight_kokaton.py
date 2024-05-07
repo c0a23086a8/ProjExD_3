@@ -133,12 +133,50 @@ class Beam:
             self.rct.move_ip(self.vx, self.vy)
             screen.blit(self.img, self.rct)
 
+"""""
+追加機能１:爆発エフェクト
+Explosionクラス作成
+"""""
+# class Explosion:
+#     def __init__(self, bomb: Bomb):
+#         bomb_img0 = pg.transform.rotozoom(pg.image.load("fig/explosion.gif"))
+#         bomb_img = pg.transform.rotozoom(pg.image.load("fig/explosion.gif"), 180, 1.0)
+#         bomb_lst = [bomb_img0, bomb_img]
+#         self.rct.center = bomb.rct.center
+#         life = NUM_OF_BOMBS
+    
+#     def update(self):
+#         life -= 1
+#         if life >= 0:
+        
+
+"""""
+追加機能2:向きに応じたビーム
+birdクラス, Beamクラス改良
+"""""
+
+"""""
+追加機能3:スコア表示
+スコアクラス作成
+"""""
+class Score:
+    def __init__(self):
+        self.fonto = pg.font.SysFont("hgp創英角ﾎﾟｯﾌﾟ体", 30)
+        self.img = self.fonto.render("Score", 0, (0, 0, 255))
+        self.rct: pg.Rect = self.img.get_rect()
+        self.rct.center = 100, HEIGHT-50
+    
+    def update(self, screen: pg.Surface):
+        self.img = self.fonto.render("Score", 0, (0, 0, 255))
+        screen.blit(self.img, self.rct)
+
 
 def main():
     pg.display.set_caption("たたかえ！こうかとん")
     screen = pg.display.set_mode((WIDTH, HEIGHT))    
     bg_img = pg.image.load("fig/pg_bg.jpg")
     bird = Bird((900, 400))
+    score = Score()
     # bomb = Bomb((255, 0, 0), 10)
     bombs = [Bomb((255, 0, 0), 10) for _ in range(NUM_OF_BOMBS)]
     beam = None
@@ -195,6 +233,7 @@ def main():
         pg.display.update()
         tmr += 1
         clock.tick(50)
+        score.update(screen)     # スコア表示
 
 
 if __name__ == "__main__":
